@@ -44,4 +44,18 @@ class EnderecoRepository
             return Endereco::create($fields);
         });
     }
+
+    public function editarEndereco($request) {
+        $fields = [
+            'cep' => $request->cep,
+            'logradouro' => $request->logradouro,
+            'bairro' => $request->logradouro,
+            'municipio' => $request->municipio,
+            'uf' => $request->uf
+        ];
+        return DB::transaction(function () use($fields) {
+            Endereco::where('cep', $fields['cep'])->update($fields);
+            return Endereco::where('cep', $fields['cep'])->first();
+        });
+    }
 }

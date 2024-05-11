@@ -37,4 +37,13 @@ class EnderecoController extends Controller
             return response()->json(['errors' => ['message' => 'Erro interno ao tentar inserir no banco de dados']], 500);
         }
     }
+
+    public function editar(EnderecoRequest $request) {
+        try {
+            $result = $this->enderecoRepository->editarEndereco($request);
+            return new EnderecoResource($result);
+        } catch (\Exception $exception) {
+            return response()->json(['errors' => ['message' => 'Erro interno ao tentar editar no banco de dados']], 500);
+        }
+    }
 }

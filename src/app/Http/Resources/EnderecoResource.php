@@ -17,7 +17,7 @@ class EnderecoResource extends JsonResource
     public function toArray(Request $request): array
     {
         if (is_null($this->resource)) {
-            return ['message' => 'Endereço não encontrado'];
+            return ['errors' => ['message' => 'Endereço não encontrado']];
         }
         return [
             'cep' => $this->cep,
