@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Exceptions\SQLException;
 use App\Models\Endereco;
+use Illuminate\Support\Facades\DB;
 
 class EnderecoRepository
 {
@@ -29,5 +30,18 @@ class EnderecoRepository
         } catch (\Exception $exception) {
             throw new SQLException('Erro ao consultar banco de dados', 500);
         }
+    }
+
+    public function cadastrarEndereco($request) {
+        $fields = [
+            'cep' => $request->cep,
+            'logradouro' => $request->logradouro,
+            'bairro' => $request->logradouro,
+            'municipio' => $request->municipio,
+            'uf' => $request->uf
+        ];
+        return DB::transaction(function () use($fields) {
+            return Endereco::create($fields);
+        });
     }
 }

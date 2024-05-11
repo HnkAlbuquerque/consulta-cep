@@ -19,5 +19,5 @@ Route::get('/consultar-cep/{cep}', [EnderecoController::class, 'consultarCep'])-
 Route::get('/consultar-endereco/{endereco}', [EnderecoController::class, 'consultarEndereco'])->where('endereco','^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+');;
 Route::get('/consultar-uf/{uf}', [EnderecoController::class, 'consultarUf'])->name('uf')->where(['uf' => '^[a-zA-Z]{2}']);;
 Route::post('/cadastrar-cep', [EnderecoController::class, 'cadastrar'])->name('cadastrar');
-Route::put('/editar-cep', [EnderecoController::class, 'editar'])->name('cadastrar');
+Route::put('/editar-cep', [EnderecoController::class, 'editar'])->name('editar');
 
