@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnderecoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/consultar-cep/{cep}', [EnderecoController::class, 'consultarCep'])->name('consulta')->where('cep','^[0-9]{8}$');
+Route::get('/consultar-endereco/{endereco}', [EnderecoController::class, 'consultarEndereco'])->where('endereco','^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ\s]+');;
+Route::get('/consultar-uf/{uf}', [EnderecoController::class, 'consultarUf'])->name('uf')->where(['uf' => '^[a-zA-Z]{2}']);;
+Route::post('/cadastrar-cep', [EnderecoController::class, 'cadastrar'])->name('cadastrar');
+Route::put('/editar-cep', [EnderecoController::class, 'editar'])->name('cadastrar');
+
